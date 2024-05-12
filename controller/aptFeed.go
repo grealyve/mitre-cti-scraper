@@ -60,6 +60,7 @@ func GetAptFeed(ctx *gin.Context) {
 	if err != nil {
 		ctx.JSON(500, gin.H{"error": "Failed to get feed URLs"})
 		helpers.SendMessageWS("APT Feed", "Failed to get feed URLs", "error")
+		helpers.SendMessageWS("", "chista_EXIT_chista", "info")
 	}
 
 	if aptFeedInput == "technics" {
@@ -67,30 +68,37 @@ func GetAptFeed(ctx *gin.Context) {
 		time.Sleep(10 * time.Second)
 		ctx.JSON(200, gin.H{"All Mitre Technics": APTFeedTechnicDataSlice})
 		helpers.SendMessageWS("APT Feed", fmt.Sprintf("All Mitre Technics %v", APTFeedTechnicDataSlice), "info")
+		helpers.SendMessageWS("", "mitre_EXIT_mitre", "info")
 	} else if aptFeedInput == "tactics" {
 		go GetAptFeedTactics()
 		time.Sleep(10 * time.Second)
 		ctx.JSON(200, gin.H{"All Mitre Tactics": APTFeedTacticDataSlice})
 		helpers.SendMessageWS("APT Feed", fmt.Sprintf("All Mitre Tactics %v", APTFeedTacticDataSlice), "info")
+		helpers.SendMessageWS("", "mitre_EXIT_mitre", "info")
 	} else if aptFeedInput == "mitigations" {
 		go GetAptFeedMitigations()
 		time.Sleep(10 * time.Second)
 		ctx.JSON(200, gin.H{"All Mitre Mitigations": APTFeedMitigationDataSlice})
 		helpers.SendMessageWS("APT Feed", fmt.Sprintf("All Mitre Mitigations %v", APTFeedMitigationDataSlice), "info")
+		helpers.SendMessageWS("", "mitre_EXIT_mitre", "info")
 	} else if aptFeedInput == "relationships" {
 		go GetAptFeedRelationships()
 		time.Sleep(10 * time.Second)
 		ctx.JSON(200, gin.H{"All Mitre Relationships": APTFeedRelationshipDataSlice})
 		helpers.SendMessageWS("APT Feed", fmt.Sprintf("All Mitre Relationships %v", APTFeedRelationshipDataSlice), "info")
+		helpers.SendMessageWS("", "mitre_EXIT_mitre", "info")
 	} else if aptFeedInput == "endpoints" {
 		ctx.JSON(200, gin.H{"Technic Endpoints": technicEndpoints,
 			"Tactic Endpoints":       tacticEndpoints,
 			"Mitigation Endpoints":   mitigationEndpoints,
 			"Relationship Endpoints": relationshipEndpoints,
 			"Intrusion Endpoints":    intrusionEndpoints})
+		helpers.SendMessageWS("APT Feed", fmt.Sprintf("Technic Endpoints %v\nTactic Endpoints %v\nMitigation Endpoints %v\nRelationship Endpoints %v\nIntrusion Endpoints %v", technicEndpoints, tacticEndpoints, mitigationEndpoints, relationshipEndpoints, intrusionEndpoints), "info")
+		helpers.SendMessageWS("", "mitre_EXIT_mitre", "info")
 	} else {
 		ctx.JSON(500, gin.H{"error": "Invalid input"})
 		helpers.SendMessageWS("APT Feed", "Invalid input", "error")
+		helpers.SendMessageWS("", "mitre_EXIT_mitre", "info")
 	}
 
 }

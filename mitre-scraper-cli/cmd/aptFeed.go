@@ -18,7 +18,7 @@ var (
 // aptFeedCmd represents the aptFeed command
 var AptFeedCmd = &cobra.Command{
 	Use:   "aptFeed",
-	Short: "--mitre\n-m techniques\n-m tactics\n-m mitigations\n-m relationships",
+	Short: "--mitre\n-m techniques\n-m tactics\n-m mitigations\n-m relationships\n-m endpoints",
 	Long: `For example:
 
 Cobra is a CLI library for Go that empowers applications.

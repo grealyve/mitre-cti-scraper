@@ -12,7 +12,7 @@ import (
 
 var (
 	CONN     *websocket.Conn
-	API_ONLY = "true"
+	API_ONLY = "false"
 	MU       sync.Mutex
 	
 )
